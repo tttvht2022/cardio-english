@@ -1,0 +1,8 @@
+{
+  "name": "cardioenglish",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Học tiếng Anh tim mạch qua Case-based Comprehensive Cardiology",
+  "engines": { "node": ">=18" }
+}

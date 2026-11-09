@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CardioEnglish – Học tiếng Anh tim mạch qua case</title>
+<meta name="description" content="Đọc Case-based Comprehensive Cardiology, tra từ, phân tích câu, ôn tập và hỏi AI.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%E2%9D%A4%EF%B8%8F%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/app.css">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#b4232f">
+<link rel="apple-touch-icon" href="icons/icon-192.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+<header class="top">
+  <button class="icon-btn" id="tocBtn" title="Phụ lục">☰</button>
+  <div class="brand">Cardio<b>English</b></div>
+  <div class="crumb" id="crumb"></div>
+  <nav class="modes">
+    <button data-mode="read" class="on">Đọc & học</button>
+    <button data-mode="review">Ôn tập</button>
+    <button data-mode="comm">Giao tiếp</button>
+    <button data-mode="settings">Cài đặt</button>
+  </nav>
+</header>
+
+<!-- TOC drawer -->
+<aside class="toc" id="toc">
+  <div class="toc-head"><b>Phụ lục</b><button class="icon-btn" id="tocClose">✕</button></div>
+  <div class="toc-tabs"><button data-tt="toc" class="on">Mục lục</button><button data-tt="find">🔎 Tìm trong sách</button></div>
+  <div id="ttToc" class="toc-pane"><input id="tocSearch" placeholder="Lọc chương… (vd: valve, van, ECG)"><div id="tocList"></div></div>
+  <div id="ttFind" class="toc-pane hidden"><input id="findQ" placeholder="Tìm từ/cụm từ trong toàn bộ sách (vd: Austin Flint)"><div id="findInfo" class="small muted" style="padding:0 14px"></div><div id="findList"></div></div>
+</aside>
+<div class="scrim" id="scrim"></div>
+
+<!-- READ MODE -->
+<main id="mode-read" class="split">
+  <section class="pane book" id="bookPane">
+    <div class="pane-bar">
+      <span class="tag">Phần 1 · Sách gốc</span>
+      <button class="btn sm" id="prevPage">‹</button>
+      <input id="pageInput" type="number" min="1" title="Trang PDF">
+      <span id="pageTotal" class="muted"></span>
+      <button class="btn sm" id="nextPage">›</button>
+      <button class="btn sm" id="zoomOut">−</button><button class="btn sm" id="zoomIn">+</button>
+      <span class="muted hint">Bấm 1 từ để tra · bôi đen 1 đoạn để phân tích</span>
+    </div>
+    <div class="viewer" id="viewer">
+      <div class="loader" id="pdfGate">
+        <h2>Mở cuốn sách của bạn</h2>
+        <p>Chọn file PDF <i>Case-based Comprehensive Cardiology</i>. File chỉ nằm trong trình duyệt của bạn (lưu lại cho lần sau), không tải lên máy chủ.</p>
+        <label class="btn pri">Chọn file PDF<input type="file" id="pdfFile" accept="application/pdf" hidden></label>
+        <p class="muted" id="pdfStatus"></p>
+      </div>
+    </div>
+  </section>
+  <div class="divider" id="divider" title="Kéo để đổi kích thước"></div>
+  <section class="pane study" id="studyPane">
+    <div class="pane-bar tabs" id="studyTabs">
+      <span class="tag">Phần 2</span>
+      <button data-tab="word" class="on">Từ vựng</button>
+      <button data-tab="passage">Đoạn văn</button>
+      <button data-tab="lesson">Bài học</button>
+      <button data-tab="chat">Hỏi AI</button>
+      <button data-tab="bank">Sổ từ <span id="bankCount" class="pill">0</span></button>
+    </div>
+    <div class="study-body">
+      <div class="tab" id="tab-word"><div class="empty">Bấm vào một từ tiếng Anh bất kỳ trong sách để xem phát âm, nghĩa, ví dụ…</div></div>
+      <div class="tab hidden" id="tab-passage"><div class="empty">Bôi đen một câu hoặc một đoạn trong sách để xem bản dịch sát nghĩa, ý nghĩa và phân tích ngữ pháp.</div></div>
+      <div class="tab hidden" id="tab-lesson"><div class="empty">Chọn một case trong <b>Phụ lục</b> (☰) để bắt đầu học.</div></div>
+      <div class="tab hidden" id="tab-chat">
+        <div id="chatLog" class="chat-log"><div class="empty">Hỏi bất cứ điều gì về trang đang đọc: dịch, giải thích cơ chế, so sánh guideline, luyện cách trình bày case bằng tiếng Anh…</div></div>
+        <form id="chatForm" class="chat-form"><textarea id="chatInput" rows="2" placeholder="Nhập câu hỏi… (Enter để gửi, Shift+Enter xuống dòng)"></textarea><button class="btn pri">Gửi</button></form>
+        <div class="row"><button class="btn sm" data-q="Dịch và giải thích các câu hỏi của case trên trang này">Dịch câu hỏi case</button><button class="btn sm" data-q="Sửa và nâng cấp câu tiếng Anh sau của tôi cho tự nhiên, chuẩn y khoa: ">Sửa câu tiếng Anh của tôi</button><button class="btn sm" data-q="Giúp tôi trình bày case này bằng tiếng Anh như khi giao ban (case presentation), kèm bản dịch">Luyện trình bày case</button></div>
+      </div>
+      <div class="tab hidden" id="tab-bank"></div>
+    </div>
+  </section>
+</main>
+
+<!-- REVIEW MODE -->
+<main id="mode-review" class="page hidden">
+  <div class="review-nav" id="reviewNav">
+    <button data-rv="today" class="on">Hôm nay</button>
+    <button data-rv="flash">Thẻ ghi nhớ</button>
+    <button data-rv="vocab">Trắc nghiệm từ vựng</button>
+    <button data-rv="clinical">Trắc nghiệm lâm sàng</button>
+    <button data-rv="ai">AI tạo đề từ case</button>
+    <button data-rv="stats">Tiến độ</button>
+  </div>
+  <div id="reviewBody"></div>
+</main>
+
+<!-- COMMUNICATION -->
+<main id="mode-comm" class="page hidden">
+  <div class="review-nav" id="commNav">
+    <button data-cv="phrases" class="on">Mẫu câu lâm sàng</button>
+    <button data-cv="ecg">Viết kết luận ECG</button>
+    <button data-cv="echo">Viết báo cáo siêu âm</button>
+    <button data-cv="practice">Luyện nói / nghe–chép</button>
+    <button data-cv="history">Lịch sử luyện</button>
+  </div>
+  <div id="commBody"></div>
+</main>
+
+<!-- SETTINGS -->
+<main id="mode-settings" class="page hidden">
+  <div class="card">
+    <h2>AI</h2>
+    <p id="aiStatus" class="muted">Đang kiểm tra…</p>
+    <label>Mã truy cập (nếu bạn đặt APP_ACCESS_CODE trên Vercel)<input id="accessCode" type="password" placeholder="••••"></label>
+    <div class="row"><button class="btn" id="saveCode">Lưu & kiểm tra</button><button class="btn" id="clearCache">Xoá bộ nhớ đệm AI</button></div>
+    <p class="muted small">Các câu trả lời của AI được lưu đệm trên máy để lần sau mở lại tức thì và tiết kiệm lượt gọi.</p>
+  </div>
+  <div class="card">
+    <h2>Đọc sách</h2>
+    <label class="chk"><input type="checkbox" id="hlSaved"> Gạch chân các từ đã lưu trong sổ từ ngay trên trang sách</label>
+    <h2 style="margin-top:14px">Mục tiêu mỗi ngày</h2>
+    <div class="form-grid">
+      <label>Từ mới lưu<input type="number" id="gWords" min="1" max="100"></label>
+      <label>Thẻ ôn<input type="number" id="gCards" min="1" max="300"></label>
+      <label>Case học<input type="number" id="gCases" min="1" max="10"></label>
+      <label>Lần luyện nói<input type="number" id="gSpeak" min="1" max="50"></label>
+    </div>
+  </div>
+  <div class="card">
+    <h2>Phát âm</h2>
+    <label>Giọng đọc mặc định <select id="voicePref"><option value="en-GB">Anh (UK)</option><option value="en-US">Mỹ (US)</option></select></label>
+    <label>Tốc độ <input id="rate" type="range" min="0.6" max="1.2" step="0.05" value="0.9"></label>
+  </div>
+  <div class="card">
+    <h2>Sách & dữ liệu</h2>
+    <div class="row"><label class="btn">Chọn lại file PDF<input type="file" id="pdfFile2" accept="application/pdf" hidden></label><button class="btn" id="forgetPdf">Xoá PDF khỏi trình duyệt</button></div>
+    <div class="row"><button class="btn" id="exportData">Sao lưu sổ từ & tiến độ (.json)</button><button class="btn" id="exportAnki">Xuất sổ từ sang Anki (.csv)</button><label class="btn">Khôi phục<input type="file" id="importData" accept="application/json" hidden></label></div>
+    <p class="muted small">Dữ liệu (sổ từ, tiến độ) lưu trong trình duyệt này. Dùng sao lưu/khôi phục để chuyển sang máy khác.</p>
+  </div>
+</main>
+
+<div class="popover hidden" id="selPop"><button class="btn pri sm" id="selAnalyze">Phân tích đoạn này</button><button class="btn sm" id="selSpeak">🔊</button><button class="btn sm" id="selAsk">Hỏi AI</button></div>
+<div class="toast" id="toast"></div>
+
+<script src="lib/pdfjs/pdf.min.js"></script>
+<script src="data/toc.js"></script>
+<script src="data/glossary.js"></script>
+<script src="data/notes.js"></script>
+<script src="data/phrases.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

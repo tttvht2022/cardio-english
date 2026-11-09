@@ -1,0 +1,50 @@
+// Mẫu câu giao tiếp lâm sàng tim mạch (tự soạn). en / vi / note (ngữ pháp – cách dùng)
+window.PHRASES = [
+ { cat: "Trình bày case (case presentation)", items: [
+  { en: "This is a 65-year-old man with a history of hypertension and type 2 diabetes who presented with a two-day history of palpitations.", vi: "Đây là bệnh nhân nam 65 tuổi, tiền sử tăng huyết áp và đái tháo đường type 2, vào viện vì hồi hộp 2 ngày.", note: "Mẫu mở đầu chuẩn: age + sex + background + 'who presented with' + duration + complaint. Dùng thì quá khứ đơn cho sự kiện nhập viện." },
+  { en: "He was admitted with acute shortness of breath and orthopnoea.", vi: "Ông được nhập viện vì khó thở cấp và khó thở khi nằm.", note: "'be admitted with' + triệu chứng (không dùng 'admitted because of' trong văn phong giao ban)." },
+  { en: "On examination, he was cold and clammy, with a blood pressure of 80 over 50 and a heart rate of 160 beats per minute.", vi: "Khám thấy da lạnh ẩm, HA 80/50 mmHg, tần số tim 160 lần/phút.", note: "Đọc huyết áp: '80 over 50'. 'On examination' mở đầu phần khám." },
+  { en: "Auscultation revealed a pansystolic murmur at the apex radiating to the axilla.", vi: "Nghe tim có âm thổi toàn tâm thu ở mỏm lan ra nách.", note: "'reveal' = cho thấy (khám, xét nghiệm). 'radiating to' = lan tới." },
+  { en: "There was no peripheral oedema and the jugular venous pressure was not raised.", vi: "Không phù ngoại biên, áp lực tĩnh mạch cảnh không tăng.", note: "Tả dấu âm tính bằng 'There was no…' / 'was not raised'." },
+  { en: "His troponin was elevated at 1,200 nanograms per litre.", vi: "Troponin tăng 1.200 ng/L.", note: "'elevated at + giá trị'." },
+ ]},
+ { cat: "Mô tả ECG", items: [
+  { en: "The ECG shows a regular narrow complex tachycardia at a rate of about 180 beats per minute.", vi: "ECG cho thấy nhịp nhanh QRS hẹp đều, tần số khoảng 180 lần/phút.", note: "'at a rate of' + số. 'narrow complex tachycardia' không cần 'QRS'." },
+  { en: "No P waves are visible, which suggests typical AVNRT.", vi: "Không thấy sóng P, gợi ý AVNRT điển hình.", note: "Mệnh đề quan hệ không xác định ', which suggests…' bình luận cả mệnh đề trước." },
+  { en: "There are retrograde P waves immediately after each QRS complex, with an RP interval of more than 90 milliseconds.", vi: "Có sóng P ngược dòng ngay sau mỗi QRS, khoảng RP trên 90 ms.", note: "Đọc 'an RP interval' (R phát âm /ɑː/ bắt đầu bằng nguyên âm → 'an')." },
+  { en: "There is ST-segment elevation in leads II, III and aVF, with reciprocal ST depression in leads I and aVL.", vi: "ST chênh lên ở DII, DIII, aVF kèm ST chênh xuống soi gương ở DI, aVL.", note: "Giới từ 'in leads…'. Đọc aVF là 'a-V-F'." },
+  { en: "The QRS axis is normal and the PR interval is prolonged at 240 milliseconds, in keeping with first-degree AV block.", vi: "Trục QRS bình thường, PR kéo dài 240 ms, phù hợp block nhĩ thất độ I.", note: "'in keeping with' = 'consistent with' = phù hợp với." },
+  { en: "The rhythm is irregularly irregular with no discernible P waves, consistent with atrial fibrillation.", vi: "Nhịp không đều hoàn toàn, không thấy rõ P, phù hợp rung nhĩ.", note: "'irregularly irregular' là cụm cố định." },
+  { en: "There is a broad complex tachycardia with AV dissociation, which is diagnostic of ventricular tachycardia.", vi: "Nhịp nhanh QRS rộng có phân ly nhĩ thất, chẩn đoán nhịp nhanh thất.", note: "'diagnostic of' (mạnh) > 'suggestive of' (gợi ý) > 'compatible with'." },
+ ]},
+ { cat: "Báo cáo siêu âm tim", items: [
+  { en: "The left ventricle is normal in size with preserved systolic function and an estimated ejection fraction of 60 percent.", vi: "Thất trái kích thước bình thường, chức năng tâm thu bảo tồn, EF ước tính 60%.", note: "'normal in size' – tính từ + in + danh từ (normal in size/thickness)." },
+  { en: "There is severe mitral regurgitation due to a flail posterior leaflet.", vi: "Hở van hai lá nặng do lá sau bị lật (flail).", note: "'due to' + danh từ chỉ nguyên nhân." },
+  { en: "The aortic valve is heavily calcified with severely reduced cusp opening; the mean gradient is 48 millimetres of mercury.", vi: "Van ĐMC vôi hoá nặng, mở lá van giảm nhiều; chênh áp trung bình 48 mmHg.", note: "Trạng từ bổ nghĩa tính từ: heavily calcified, severely reduced." },
+  { en: "The right ventricle is dilated with reduced longitudinal function; TAPSE is 12 millimetres.", vi: "Thất phải giãn, chức năng dọc giảm; TAPSE 12 mm.", note: "Đọc TAPSE là 'tap-see'." },
+  { en: "The estimated pulmonary artery systolic pressure is 55 millimetres of mercury, assuming a right atrial pressure of 15.", vi: "Áp lực tâm thu ĐMP ước tính 55 mmHg, giả định áp lực nhĩ phải 15.", note: "Phân từ 'assuming…' rút gọn mệnh đề điều kiện." },
+  { en: "There is a moderate circumferential pericardial effusion without echocardiographic signs of tamponade.", vi: "Tràn dịch màng ngoài tim lượng vừa, toàn chu vi, không có dấu hiệu chèn ép trên siêu âm.", note: "'without signs of' để phủ định." },
+  { en: "The inferior vena cava is dilated with less than 50 percent inspiratory collapse.", vi: "TMC dưới giãn, xẹp khi hít vào dưới 50%.", note: "" },
+  { en: "Agitated saline injected into a left arm vein opacified the coronary sinus before the right atrium.", vi: "Bubble tiêm tĩnh mạch tay trái làm xoang vành cản quang trước nhĩ phải.", note: "Phân từ quá khứ 'injected into…' bổ nghĩa cho 'agitated saline' (rút gọn mệnh đề bị động)." },
+ ]},
+ { cat: "Nhận định & kế hoạch", items: [
+  { en: "The most likely diagnosis is atrial flutter with two-to-one conduction.", vi: "Chẩn đoán nhiều khả năng nhất là cuồng nhĩ dẫn truyền 2:1.", note: "Đọc 2:1 là 'two-to-one'." },
+  { en: "The differential diagnoses include AVNRT, AVRT and atrial tachycardia.", vi: "Chẩn đoán phân biệt gồm AVNRT, AVRT và nhanh nhĩ.", note: "Số nhiều: diagnosis → diagnoses /-siːz/." },
+  { en: "As he is haemodynamically unstable, we proceeded with synchronised cardioversion.", vi: "Vì bệnh nhân không ổn định huyết động, chúng tôi đã tiến hành sốc điện đồng bộ.", note: "'proceed with' + thủ thuật. 'As' = vì (văn viết)." },
+  { en: "We will start him on a beta-blocker and anticoagulation, and arrange an outpatient echocardiogram.", vi: "Sẽ bắt đầu chẹn beta và kháng đông, hẹn siêu âm tim ngoại trú.", note: "'start somebody on' + thuốc; 'arrange' + xét nghiệm/lịch hẹn." },
+  { en: "I would like to discuss this patient with the heart team regarding valve intervention.", vi: "Tôi muốn hội chẩn Heart Team về can thiệp van cho bệnh nhân này.", note: "'I would like to…' lịch sự trong giao ban/hội chẩn." },
+  { en: "He meets the criteria for surgery given his symptoms and an ejection fraction below 60 percent.", vi: "Bệnh nhân đủ tiêu chuẩn phẫu thuật do có triệu chứng và EF dưới 60%.", note: "'meet the criteria for'; 'given' = xét đến." },
+ ]},
+ { cat: "Giao ban / bàn giao ICU", items: [
+  { en: "Overnight, he remained haemodynamically stable on a low dose of noradrenaline.", vi: "Qua đêm bệnh nhân ổn định huyết động với noradrenaline liều thấp.", note: "'on + thuốc' = đang dùng." },
+  { en: "The main issues today are fluid overload and worsening renal function.", vi: "Vấn đề chính hôm nay là quá tải dịch và chức năng thận xấu đi.", note: "" },
+  { en: "Things to follow up: repeat ECG and troponin at six hours, and a formal echo in the morning.", vi: "Việc cần theo dõi: làm lại ECG và troponin sau 6 giờ, siêu âm tim chính thức sáng mai.", note: "'formal echo' = siêu âm đầy đủ do bác sĩ siêu âm làm." },
+  { en: "Please escalate to the cardiology registrar if his blood pressure drops below 90 systolic.", vi: "Vui lòng báo bác sĩ tim mạch trực nếu HA tâm thu dưới 90.", note: "'escalate to' = báo lên tuyến trên." },
+ ]},
+ { cat: "Nói chuyện với bệnh nhân", items: [
+  { en: "Your heart scan shows that one of the valves is not closing properly, so some blood leaks backwards.", vi: "Siêu âm tim cho thấy một van đóng không kín nên có một ít máu bị trào ngược.", note: "Dùng từ ngữ đơn giản, tránh thuật ngữ." },
+  { en: "Your heart was beating very fast, so we gave you a small electric shock to put it back into a normal rhythm.", vi: "Tim anh đập rất nhanh nên chúng tôi đã sốc điện nhẹ để đưa về nhịp bình thường.", note: "'put back into a normal rhythm'." },
+  { en: "Have you had any chest pain, dizziness or fainting episodes?", vi: "Anh có bị đau ngực, chóng mặt hay ngất lần nào không?", note: "Hiện tại hoàn thành để hỏi tiền sử gần đây." },
+  { en: "We need to take a blood thinner to reduce the risk of a stroke.", vi: "Mình cần dùng thuốc chống đông để giảm nguy cơ đột quỵ.", note: "'blood thinner' – cách nói bình dân của anticoagulant." },
+ ]},
+];
